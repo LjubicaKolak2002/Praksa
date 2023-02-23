@@ -1,26 +1,26 @@
 const fs = require('fs');
 const path = require('path');
 
-function getLatestFile(dirpath) {
-  let latest;
+function getLatestFile(directory) {
+  let latestFile;
 
-  const files = fs.readdirSync(dirpath);
+  const files = fs.readdirSync(directory);
   files.forEach(filename => {
-    const stat = fs.lstatSync(path.join(dirpath, filename));
+    const stat = fs.lstatSync(path.join(directory, filename));
     if (stat.isDirectory())
       return;
 
-    if (!latest) {
-      latest = {filename, mtime: stat.mtime};
+    if (!latestFile) {
+      latestFile = {filename, mtime: stat.mtime};
       return;
     }
-    if (stat.mtime > latest.mtime) {
-      latest.filename = filename;
-      latest.mtime = stat.mtime;
+    if (stat.mtime > latestFile.mtime) {
+      latestFile.filename = filename;
+      latestFile.mtime = stat.mtime;
     }
   });
 
-  return latest.filename;
+  return latestFile.filename;
 }
 
 
