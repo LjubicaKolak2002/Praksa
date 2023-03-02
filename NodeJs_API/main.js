@@ -1,6 +1,6 @@
 var express = require('express');
 var app = express();
-var fs = require("fs");
+var fs = require('fs');
 
 app.get('/users/:id', function (req, res) {
     fs.readFile( __dirname + "/" + "data.json", function (err, data) {
@@ -10,9 +10,9 @@ app.get('/users/:id', function (req, res) {
         
         let allData = JSON.parse(data);
         let user = allData.users.find(u => u.id == req.params.id)
-        if (!user) {
+        if (typeof user === 'undefined') {
             res.status(400);
-            res.send("The user with id " + req.params.id + " does not exist.")
+            res.send("User with id " + req.params.id + " does not exist.")
         }
         res.end(JSON.stringify(user));
     });
@@ -25,28 +25,28 @@ app.get('/posts/:id', function (req, res) {
             console.log(err);
         }
 
-        var allData = JSON.parse(data);
+        let allData = JSON.parse(data);
         let post = allData.posts.find(p => p.id == req.params.id)
 
-        if (!post) {
+        if (typeof post === 'undefined') {
             res.status(400);
-            res.send("The post with id " +  req.params.id + " does not exist.");
+            res.send("Post with id " +  req.params.id + " does not exist.");
         }
         res.end(JSON.stringify(post));
     });
 })
 
+
 app.get('/posts/', function (req, res){
 
     let startDate = new Date(req.query.DatumOd).toJSON().slice(0, 10);
-    //let startDate = start.toISOString().replace('Z', '').replace('T', ' ');;
     let endDate = new Date(req.query.DatumDo).toJSON().slice(0, 10);
-    //let endDate = end.toISOString().replace('Z', '').replace('T', ' ');
-    
+
     fs.readFile(__dirname + "/" + "data.json", function (err, data) {
         if (err) {
             console.log(err);
         }
+
         let allData = JSON.parse(data);
         let arr = [];  
         if (startDate > endDate) {
@@ -62,6 +62,7 @@ app.get('/posts/', function (req, res){
         res.end(JSON.stringify(arr));
     });
     
+    
 })
 
 
@@ -70,19 +71,22 @@ app.post('/users/:id/', function (req, res) {
         if (err) {
             console.log(err);
         }
+
         let allData = JSON.parse(data);
-        let index = allData.users.findIndex(u => u.id == req.params.id)
+        let user = allData.users.find(u => u.id == req.params.id);
+        let index = allData.users.indexOf(user);
+        
         if (index === -1) {
             res.status(400);
             res.send("The user with id " + req.params.id + " does not exist");
         }
-        
+
         allData.users[index]["email"] = req.query.noviEmail;
         fs.writeFile("data.json", JSON.stringify(allData), (err) => {
             if (err) {
                 console.log(err);
             }
-            console.log("Mail has been successfully changed.")
+            //console.log("Mail has been successfully changed.")
         })
         res.end(JSON.stringify(allData))
     })
@@ -94,7 +98,7 @@ app.put('/posts', function (req, res) {
         if (err) {
             console.log(err);
         }
-        
+      
         let allData = JSON.parse(data);
 
         let postDate = new Date().toJSON().slice(0, 10);
@@ -102,7 +106,7 @@ app.put('/posts', function (req, res) {
         let postUpdate = postDate + " " + postTime;
 
         let userFound = allData.users.find(u => u.id == req.query.userId)
-        if (!userFound) {
+        if (typeof userFound === 'undefined') {
             res.status(400);
             res.send("Error! The user with id " + req.query.userId + " does not exist.")
         }
@@ -119,7 +123,7 @@ app.put('/posts', function (req, res) {
                 if (err) {
                     console.log(err);
                 }
-                console.log("The post has been added")
+                //console.log("The post has been added")
             })
             res.end(JSON.stringify(allData));
         }
@@ -127,6 +131,6 @@ app.put('/posts', function (req, res) {
 })
 
 
-app.listen(3000, function() {
+app.listen(8081, function() {
     console.log("App listening...");
 })
