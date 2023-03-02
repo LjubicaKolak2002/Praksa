@@ -11,7 +11,7 @@ app.get('/users/:id', function (req, res) {
         let allData = JSON.parse(data);
         let user = allData.users.find(u => u.id == req.params.id)
         if (typeof user === 'undefined') {
-            res.status(400);
+            res.status(404);
             res.send("User with id " + req.params.id + " does not exist.")
         }
         res.end(JSON.stringify(user));
@@ -29,7 +29,7 @@ app.get('/posts/:id', function (req, res) {
         let post = allData.posts.find(p => p.id == req.params.id)
 
         if (typeof post === 'undefined') {
-            res.status(400);
+            res.status(404);
             res.send("Post with id " +  req.params.id + " does not exist.");
         }
         res.end(JSON.stringify(post));
@@ -50,7 +50,7 @@ app.get('/posts/', function (req, res){
         let allData = JSON.parse(data);
         let arr = [];  
         if (startDate > endDate) {
-            res.status(400);
+            res.status(404);
             res.send("Wrong date range");
         } 
 
@@ -77,7 +77,7 @@ app.post('/users/:id/', function (req, res) {
         let index = allData.users.indexOf(user);
         
         if (index === -1) {
-            res.status(400);
+            res.status(404);
             res.send("The user with id " + req.params.id + " does not exist");
         }
 
