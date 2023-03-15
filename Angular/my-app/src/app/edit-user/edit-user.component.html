@@ -1,0 +1,16 @@
+<div class="edit_form">
+    <h3>Edit user</h3>
+    <form [formGroup]="editUserForm" (ngSubmit)="onUpdate()">
+        <div class="form-group">
+            <label>Name</label>
+            <input class="form-control" type="text" formControlName="name" placeholder="Enter name" required>
+        </div>
+        <div class="form-group">
+            <label>Email</label>
+            <input class="form-control" type="text" formControlName="email" placeholder="Enter email" required>
+        </div>
+        <br/>
+        <button type="submit"  class="btn btn-primary">Edit</button>
+    </form>
+</div>
+    

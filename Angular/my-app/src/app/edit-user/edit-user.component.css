@@ -1,0 +1,16 @@
+.edit_form {
+    width: 35%;
+    position: relative;
+    left: 30%;
+}
+
+h3 {
+    position: relative;
+    text-align: center;
+}
+
+button {
+    position: relative;
+    left: 45%;
+    
+}

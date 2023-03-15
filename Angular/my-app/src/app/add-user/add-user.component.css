@@ -1,0 +1,16 @@
+.add_form {
+    width: 45%;
+    position: relative;
+    left: 25%;
+}
+
+h3 {
+    position: relative;
+    text-align: center;
+}
+
+button {
+    position: relative;
+    left: 45%;
+    
+}

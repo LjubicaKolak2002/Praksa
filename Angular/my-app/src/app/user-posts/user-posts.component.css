@@ -1,0 +1,18 @@
+table {
+    width: 70%;
+    position: relative;
+    text-align: center;
+    left: 15%;
+    
+}
+
+h5 {
+    position: relative;
+    text-align: center;
+}
+
+.nav-link {
+    color: rgb(0, 123, 255);
+    text-decoration: underline;
+}
+

@@ -1,0 +1,58 @@
+<div class="table">
+
+<h5>Users and posts</h5>
+<table class="table table-bordered">
+    <thead class="table-primary">
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Action</th>
+        <th>POSTS
+          <table>
+            <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Title</th>
+                  <th>Body</th>
+                  <th>Last update</th>
+                </tr>
+              </thead>
+            </table>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let user of users">
+        <tr>
+          <td>{{user.id}}</td>
+          <td>{{user.name}}</td>
+          <td>{{user.email}}</td>
+          <td>  <a class="nav-link" routerLink="/edit-user/{{user.id}}">Edit</a></td>
+          <td>
+            <table>
+                  <ng-container *ngFor="let post of posts">
+                    <ng-container *ngIf="user.id == post.user_id">
+                      <tbody>
+                        <td>{{post.id}}</td>
+                        <td>{{post.title}}</td>
+                        <td>{{post.body}}</td>
+                        <td>{{post.last_update}}</td>
+                      </tbody>
+                    </ng-container>
+                  </ng-container>    
+            </table>
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>
+
+
+
+
+
+
+
+
+</div>
