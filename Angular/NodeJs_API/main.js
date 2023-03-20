@@ -7,7 +7,7 @@ app.use(cors())
 app.use(bodyParser.json());
 
 //get posts
-app.get('/api/posts/', function (req, res) {
+app.get('/posts/', function (req, res) {
     fs.readFile( __dirname + "/" + "data.json", function (err, data) {
         if (err) {
             console.log(err);
@@ -19,7 +19,7 @@ app.get('/api/posts/', function (req, res) {
 })
 
 //get user
-app.get('/api/users/', function (req, res) {
+app.get('/users/', function (req, res) {
     fs.readFile( __dirname + "/" + "data.json", function (err, data) {
         if (err) {
             console.log(err);
@@ -32,7 +32,7 @@ app.get('/api/users/', function (req, res) {
 
 
 //edit user
-app.post('/api/users/:id/', function (req, res) {
+app.post('/users/:id/', function (req, res) {
     fs.readFile(__dirname + "/" + "data.json", function (err, data) {
         if (err) {
             console.log(err);
@@ -60,7 +60,7 @@ app.post('/api/users/:id/', function (req, res) {
 
 
 //add user
-app.put('/api/users', function (req, res) {
+app.put('/users', function (req, res) {
     fs.readFile(__dirname + "/" + "data.json", function (err, data) {
         if (err) {
             console.log(err);
@@ -94,7 +94,7 @@ app.put('/api/users', function (req, res) {
 })
 
 //get user by id
-app.get('/api/users/:id', function (req, res) {
+app.get('/users/:id', function (req, res) {
     fs.readFile( __dirname + "/" + "data.json", function (err, data) {
         if (err) {
             console.error(err); 
@@ -113,6 +113,6 @@ app.get('/api/users/:id', function (req, res) {
 
 
 
-app.listen(3080, function() {
+app.listen(3000, function() {
     console.log("App listening...");
 })
